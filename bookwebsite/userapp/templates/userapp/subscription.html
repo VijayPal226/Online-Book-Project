@@ -33,8 +33,9 @@
                         <li>✔ Standard support</li>
                     </ul>
 
-                    <form method="POST" action="{% url 'subscribe_free' %}">
+                    <form method="POST" action="{% url 'subscription' %}">
                         {% csrf_token %}
+                        <input type="hidden" name="plan" value="Free">
                         <button class="btn btn-outline-primary w-100 mt-3">
                             Start Free
                         </button>
@@ -63,8 +64,9 @@
                         <li>✔ Priority support</li>
                     </ul>
 
-                    <form method="POST" action="{% url 'subscribe_basic' %}">
+                    <form method="POST" action="{% url 'subscription' %}">
                         {% csrf_token %}
+                        <input type="hidden" name="plan" value="Basic">
                         <button class="btn btn-primary w-100 mt-3">
                             Choose Basic
                         </button>
@@ -94,8 +96,9 @@
                         <li>✔ Exclusive content</li>
                     </ul>
 
-                    <form method="POST" action="{% url 'subscribe_premium' %}">
+                    <form method="POST" action="{% url 'subscription' %}">
                         {% csrf_token %}
+                        <input type="hidden" name="plan" value="Premium">
                         <button class="btn btn-dark w-100 mt-3">
                             Go Premium
                         </button>

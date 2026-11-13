@@ -1,60 +1,77 @@
-<!-- settings.html -->
+<!DOCTYPE html>
+<html lang="en">
 
-{% extends "adminapp/base.html" %}
-{% block admin %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
 
-<div class="container-fluid">
+{% load static %}
+<link rel="stylesheet"
+    href="{% static 'mainapp/css/bootstrap.css' %}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
 
-    <div class="card shadow border-0 rounded-4">
+<body class="bg-light">
 
-        <div class="card-body">
+    <div class="container">
+        <div class="row justify-content-center align-items-center"
+             style="min-height: 100vh;">
 
-            <h2 class="fw-bold mb-4">
-                Settings
-            </h2>
+            <div class="col-md-5 col-lg-4">
 
-            <form>
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body p-4 p-md-5">
 
-                <div class="mb-3">
+                        <div class="text-center mb-4">
+                            <i class="fa-solid fa-shield-halved text-primary"
+                               style="font-size: 48px;"></i>
+                            <h3 class="fw-bold mt-2">Admin Login</h3>
+                            <p class="text-muted small">Book Website Admin Panel</p>
+                        </div>
 
-                    <label>Website Name</label>
+                        {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-danger py-2">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        {% endif %}
 
-                    <input type="text"
-                        class="form-control"
-                        value="Online Book Store">
+                        <form method="POST">
+                            {% csrf_token %}
 
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Username or Email</label>
+                                <input type="text" name="username" class="form-control"
+                                       placeholder="Enter username or email" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Password</label>
+                                <input type="password" name="password" class="form-control"
+                                       placeholder="Enter password" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fa-solid fa-right-to-bracket"></i> Login
+                            </button>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <a href="{% url 'home' %}" class="text-decoration-none small">
+                                &larr; Back to Website
+                            </a>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="mb-3">
-
-                    <label>Email</label>
-
-                    <input type="email"
-                        class="form-control"
-                        value="admin@gmail.com">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label>Contact</label>
-
-                    <input type="text"
-                        class="form-control"
-                        value="+91 9876543210">
-
-                </div>
-
-                <button class="btn btn-primary">
-                    Save Changes
-                </button>
-
-            </form>
+            </div>
 
         </div>
-
     </div>
 
-</div>
-
-{% endblock %}
+</body>
+</html>

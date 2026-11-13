@@ -43,7 +43,7 @@
                                         <td class="text-muted">{{ file.description|default:"-" }}</td>
                                         <td>{{ file.created_at|date:"d M Y" }}</td>
                                         <td>
-                                            <a href="{{ file.file.url }}" class="btn btn-sm btn-primary" download>
+                                            <a href="{{ file.pdf_file.url }}" class="btn btn-sm btn-primary" download>
                                                 Download
                                             </a>
                                         </td>

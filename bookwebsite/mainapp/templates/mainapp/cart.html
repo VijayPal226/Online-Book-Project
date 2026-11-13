@@ -1,4 +1,3 @@
-<!-- cart.html -->
 {% extends "base.html" %}
 {% load static %}
 {% block main %}
@@ -9,61 +8,84 @@
         Shopping Cart
     </h1>
 
-    <div class="card shadow border-0 rounded-4 p-4">
+    {% if cart_items %}
 
-        <div class="row align-items-center">
+        {% for item in cart_items %}
+        <div class="card shadow border-0 rounded-4 p-3 mb-3">
 
-            <div class="col-md-3">
+            <div class="row align-items-center">
 
-                <img src="{% static 'mainapp/img/book.jpg' %}"
-                    class="img-fluid rounded"
-                    alt="book">
+                <div class="col-md-2">
+                    {% if item.book.image %}
+                    <img src="{{ item.book.image.url }}"
+                        class="img-fluid rounded"
+                        alt="{{ item.book.title }}">
+                    {% else %}
+                    <img src="{% static 'mainapp/img/book.jpg' %}"
+                        class="img-fluid rounded"
+                        alt="{{ item.book.title }}">
+                    {% endif %}
+                </div>
 
-            </div>
+                <div class="col-md-5">
+                    <h5>{{ item.book.title }}</h5>
+                    <p class="text-muted mb-1">
+                        by {{ item.book.author }}
+                    </p>
+                    <p class="mb-0">
+                        Qty: {{ item.quantity }}
+                        {% if item.book.stock < item.quantity %}
+                            <span class="text-danger small">(only {{ item.book.stock }} left)</span>
+                        {% endif %}
+                    </p>
+                </div>
 
-            <div class="col-md-5">
+                <div class="col-md-2">
+                    <h6 class="text-muted mb-0">
+                        ₹{{ item.unit_price }} each
+                    </h6>
+                </div>
 
-                <h3>
-                    Python Programming
-                </h3>
+                <div class="col-md-2">
+                    <h5 class="text-success">
+                        ₹{{ item.line_total }}
+                    </h5>
+                </div>
 
-                <p class="text-muted">
-                    Best Coding Book
-                </p>
-
-            </div>
-
-            <div class="col-md-2">
-
-                <h4>
-                    ₹499
-                </h4>
-
-            </div>
-
-            <div class="col-md-2">
-
-                <button class="btn btn-danger">
-                    Remove
-                </button>
+                <div class="col-md-1 text-end">
+                    <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Remove
+                        </button>
+                    </form>
+                </div>
 
             </div>
 
         </div>
+        {% endfor %}
 
-    </div>
+        <div class="text-end mt-4">
+            <h3 class="fw-bold">
+                Total : ₹{{ total }}
+            </h3>
 
-    <div class="text-end mt-4">
+            <a href="{% url 'contact' %}" class="btn btn-success btn-lg mt-2">
+                Proceed to Checkout
+            </a>
+        </div>
 
-        <h3 class="fw-bold">
-            Total : ₹499
-        </h3>
+    {% else %}
 
-        <button class="btn btn-success btn-lg mt-2">
-            Checkout
-        </button>
+        <div class="text-center py-5">
+            <h4 class="text-muted">Your cart is empty</h4>
+            <a href="{% url 'home' %}" class="btn btn-primary mt-3">
+                Continue Shopping
+            </a>
+        </div>
 
-    </div>
+    {% endif %}
 
 </div>
 

@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+
+<div class="container py-5">
+
+    <div class="row g-4">
+
+        <!-- Book Image -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+                {% if book.image %}
+                <img src="{{ book.image.url }}"
+                     class="card-img-top"
+                     alt="{{ book.title }}"
+                     style="height: 450px; object-fit: cover;">
+                {% else %}
+                <img src="{% static 'mainapp/img/book.jpg' %}"
+                     class="card-img-top"
+                     alt="{{ book.title }}"
+                     style="height: 450px; object-fit: cover;">
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Book Info -->
+        <div class="col-md-8">
+
+            <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+
+                <h2 class="fw-bold">{{ book.title }}</h2>
+
+                <p class="text-muted mb-1">
+                    by <b>{{ book.author }}</b>
+                </p>
+
+                <p class="text-muted small mb-3">
+                    Category: {{ book.category }}
+                </p>
+
+                <div class="mb-3">
+                    <span class="text-decoration-line-through text-muted">
+                        ₹{{ book.price }}
+                    </span>
+                    <h3 class="text-success d-inline ms-2">
+                        ₹{% if book.discount_price %}{{ book.discount_price }}{% else %}{{ book.price }}{% endif %}
+                    </h3>
+                </div>
+
+                {% if book.stock <= 0 %}
+                    <p class="text-danger fw-bold">Out of Stock</p>
+                {% else %}
+                    <p class="text-success">✓ In Stock ({{ book.stock }} available)</p>
+                {% endif %}
+
+                <hr>
+
+                <h5>Description</h5>
+                <p class="text-muted">{{ book.description }}</p>
+
+                <!-- Actions -->
+                <div class="d-flex gap-2 flex-wrap mt-3">
+
+                    {% if book.stock > 0 %}
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'addtocart' book.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-success btn-lg">
+                            <i class="fa-solid fa-cart-plus"></i> Login to Buy
+                        </a>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <form action="{% url 'add_to_wishlist' book.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger btn-lg">
+                            {% if in_wishlist %}
+                                <i class="fa-solid fa-heart"></i> Remove from Wishlist
+                            {% else %}
+                                <i class="fa-regular fa-heart"></i> Add to Wishlist
+                            {% endif %}
+                        </button>
+                    </form>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="mb-4">Customer Reviews</h3>
+
+            {% for review in reviews %}
+            <div class="card shadow-sm border-0 rounded-4 p-3 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <b>{{ review.user.username }}</b>
+                    <span class="text-warning">
+                        {% for i in "12345" %}{% if forloop.counter <= review.rating %}★{% endif %}{% endfor %}
+                    </span>
+                </div>
+                <p class="text-muted mb-0 mt-2">{{ review.comment }}</p>
+            </div>
+            {% empty %}
+            <p class="text-muted">No reviews yet for this book.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

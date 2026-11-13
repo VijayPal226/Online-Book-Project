@@ -24,13 +24,13 @@
                 <div class="card h-100 shadow-sm border-0 rounded-3">
 
                     <!-- Book Image -->
-                    {% if book.cover_image %}
-                        <img src="{{ book.cover_image.url }}" 
+                    {% if book.image %}
+                        <img src="{{ book.image.url }}" 
                              class="card-img-top"
                              alt="{{ book.title }}"
                              style="height: 220px; object-fit: cover;">
                     {% else %}
-                        <img src="{% static 'default-book.png' %}" 
+                        <img src="{% static 'mainapp/img/book.jpg' %}" 
                              class="card-img-top"
                              alt="Default Book"
                              style="height: 220px; object-fit: cover;">
@@ -54,13 +54,15 @@
                         <!-- Action Buttons -->
                         <div class="d-grid gap-2 mt-2">
 
-                            <a href="{% url 'book_detail' book.id %}" class="btn btn-primary btn-sm">
+                            <a href="{% url 'book_details' book.id %}" class="btn btn-primary btn-sm">
                                 View Details
                             </a>
 
-                            <a href="{{ book.file.url }}" class="btn btn-outline-success btn-sm" download>
+                            {% if book.pdf_file %}
+                            <a href="{{ book.pdf_file.url }}" class="btn btn-outline-success btn-sm" download>
                                 Download
                             </a>
+                            {% endif %}
 
                         </div>
 

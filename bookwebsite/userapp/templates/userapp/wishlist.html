@@ -23,37 +23,37 @@
                 <div class="card h-100 shadow-sm border-0 rounded-3">
 
                     <!-- Product Image -->
-                    {% if item.product.image %}
-                        <img src="{{ item.product.image.url }}"
+                    {% if item.book.image %}
+                        <img src="{{ item.book.image.url }}"
                              class="card-img-top"
-                             alt="{{ item.product.name }}"
+                             alt="{{ item.book.title }}"
                              style="height: 220px; object-fit: cover;">
                     {% else %}
-                        <img src="{% static 'default-product.png' %}"
+                        <img src="{% static 'mainapp/img/book.jpg' %}"
                              class="card-img-top"
-                             alt="Product"
+                             alt="Book"
                              style="height: 220px; object-fit: cover;">
                     {% endif %}
 
                     <div class="card-body d-flex flex-column">
 
                         <!-- Name -->
-                        <h5 class="card-title">{{ item.product.name }}</h5>
+                        <h5 class="card-title">{{ item.book.title }}</h5>
 
                         <!-- Price -->
                         <p class="text-success fw-bold mb-2">
-                            ₹{{ item.product.price }}
+                            ₹{{ item.book.price }}
                         </p>
 
                         <!-- Description -->
                         <p class="small text-muted flex-grow-1">
-                            {{ item.product.description|truncatechars:80 }}
+                            {{ item.book.description|truncatechars:80 }}
                         </p>
 
                         <!-- Actions -->
                         <div class="d-grid gap-2">
 
-                            <a href="{% url 'product_detail' item.product.id %}"
+                            <a href="{% url 'book_details' item.book.id %}"
                                class="btn btn-primary btn-sm">
                                 View Product
                             </a>

@@ -28,8 +28,9 @@
                         Pay securely using Debit or Credit Card
                     </p>
 
-                    <form method="POST" action="{% url 'card_payment' %}">
+                    <form method="POST" action="{% url 'payment_methods' %}">
                         {% csrf_token %}
+                        <input type="hidden" name="method" value="Card">
 
                         <div class="mb-2">
                             <input type="text" name="card_number" class="form-control"
@@ -69,8 +70,9 @@
                         Pay using Google Pay, PhonePe, Paytm, etc.
                     </p>
 
-                    <form method="POST" action="{% url 'upi_payment' %}">
+                    <form method="POST" action="{% url 'payment_methods' %}">
                         {% csrf_token %}
+                        <input type="hidden" name="method" value="UPI">
 
                         <div class="mb-2">
                             <input type="text" name="upi_id" class="form-control"
@@ -100,8 +102,9 @@
                         Pay when your order is delivered
                     </p>
 
-                    <form method="POST" action="{% url 'cod_payment' %}">
+                    <form method="POST" action="{% url 'payment_methods' %}">
                         {% csrf_token %}
+                        <input type="hidden" name="method" value="COD">
 
                         <button type="submit" class="btn btn-warning w-100 mt-4">
                             Place Order

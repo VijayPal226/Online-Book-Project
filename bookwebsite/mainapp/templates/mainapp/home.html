@@ -186,7 +186,8 @@
 
 </div>
 
-<!-- Featured Books -->
+<!-- Featured Books Slider -->
+{% if books %}
 <div class="row my-5">
 
   <div class="col-sm-10 mx-auto">
@@ -197,119 +198,137 @@
 
     <hr>
 
-    <section class="splide">
+    <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
 
-      <div class="splide__track">
+      <!-- Indicators -->
+      <div class="carousel-indicators">
+        {% for b in books %}
+        <button type="button" data-bs-target="#bookCarousel"
+                data-bs-slide-to="{{ forloop.counter0 }}"
+                {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+      </div>
 
-        <ul class="splide__list">
+      <div class="carousel-inner">
 
-          {% for b in books %}
+        {% for b in books %}
 
-          <li class="splide__slide">
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
 
-            <div class="image-container position-relative">
+          <div class="card shadow border-0 rounded-4 overflow-hidden">
+            <div class="row g-0 align-items-center">
 
               <!-- Book Image -->
-              <a href="{% url 'book_details' b.id %}">
-
-                {% if b.cover_image %}
-
-                <img src="{{ b.cover_image.url }}"
-                  class="card-img-top w-100"
-                  style="height:450px; object-fit:cover;">
-
-                {% else %}
-
-                <img src="{% static 'mainapp/img/default.jpg' %}"
-                  class="card-img-top w-100"
-                  style="height:450px; object-fit:cover;">
-
-                {% endif %}
-
-              </a>
-
-              <!-- Wishlist -->
-              <a href="{% url 'add_to_wishlist' b.id %}"
-                style="position:absolute;
-                top:10px;
-                right:10px;
-                font-size:22px;
-                text-decoration:none;">
-
-                {% if b.id in wishlist_ids %}
-                <i class="fa-solid fa-heart text-danger"></i>
-                {% else %}
-                <i class="fa-regular fa-heart text-danger"></i>
-                {% endif %}
-
-              </a>
-
-              <!-- Details -->
-              <div class="card-body text-center">
-
-                <a href="{% url 'book_details' b.id %}"
-                  style="text-decoration:none; color:black;">
-
-                  <h5>{{ b.title }}</h5>
-
+              <div class="col-md-4">
+                <a href="{% url 'book_details' b.id %}">
+                  {% if b.image %}
+                  <img src="{{ b.image.url }}"
+                       class="img-fluid w-100"
+                       style="height: 380px; object-fit: cover;"
+                       alt="{{ b.title }}">
+                  {% else %}
+                  <img src="{% static 'mainapp/img/book.jpg' %}"
+                       class="img-fluid w-100"
+                       style="height: 380px; object-fit: cover;"
+                       alt="{{ b.title }}">
+                  {% endif %}
                 </a>
+              </div>
 
-                <div class="mb-2">
+              <!-- Book Details -->
+              <div class="col-md-8 position-relative">
 
-                  <span style="text-decoration:line-through;">
-                    ₹ {{ b.original_price }}
-                  </span>
+                <!-- Wishlist -->
+                {% if user.is_authenticated %}
+                <form action="{% url 'add_to_wishlist' b.id %}" method="post"
+                      class="position-absolute top-0 end-0 m-3">
+                  {% csrf_token %}
+                  <button type="submit"
+                          class="btn btn-light rounded-circle shadow-sm"
+                          style="width: 45px; height: 45px;"
+                          title="{% if b.id in wishlist_ids %}Remove from Wishlist{% else %}Add to Wishlist{% endif %}">
+                    {% if b.id in wishlist_ids %}
+                    <i class="fa-solid fa-heart text-danger"></i>
+                    {% else %}
+                    <i class="fa-regular fa-heart text-danger"></i>
+                    {% endif %}
+                  </button>
+                </form>
+                {% endif %}
 
-                  <b class="text-success ms-2">
-                    ₹ {{ b.price }}
-                  </b>
+                <div class="card-body p-4 p-md-5">
+
+                  <span class="badge bg-success mb-2">{{ b.category }}</span>
+
+                  <h3 class="fw-bold">
+                    <a href="{% url 'book_details' b.id %}" class="text-decoration-none text-dark">
+                      {{ b.title }}
+                    </a>
+                  </h3>
+
+                  <p class="text-muted mb-1">by <b>{{ b.author }}</b></p>
+
+                  <p class="text-muted">
+                    {{ b.description|truncatechars:140 }}
+                  </p>
+
+                  <div class="mb-3">
+                    <span class="text-decoration-line-through text-muted">
+                      ₹{{ b.price }}
+                    </span>
+                    <h4 class="text-success d-inline ms-2">
+                      ₹{% if b.discount_price %}{{ b.discount_price }}{% else %}{{ b.price }}{% endif %}
+                    </h4>
+                  </div>
+
+                  {% if b.stock <= 0 %}
+                    <p class="text-danger fw-bold mb-3">Out of Stock</p>
+                  {% elif not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="btn btn-success btn-lg">
+                      Login to Buy
+                    </a>
+                  {% else %}
+                    <form action="{% url 'addtocart' b.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button class="btn btn-success btn-lg">
+                        <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                      </button>
+                    </form>
+                    <a href="{% url 'book_details' b.id %}" class="btn btn-outline-primary btn-lg ms-2">
+                      View Details
+                    </a>
+                  {% endif %}
 
                 </div>
-
-                {% if b.stock == 0 %}
-
-                <p class="text-danger">
-                  Out of stock
-                </p>
-
-                {% else %}
-
-                <form action="{% url 'addtocart' b.id %}"
-                  method="post">
-
-                  {% csrf_token %}
-
-                  <button class="btn btn-success">
-                    Add To Cart
-                  </button>
-
-                </form>
-
-                {% endif %}
 
               </div>
 
             </div>
+          </div>
 
-          </li>
+        </div>
 
-          {% empty %}
-
-          <p class="text-center">
-            No books available
-          </p>
-
-          {% endfor %}
-
-        </ul>
+        {% endfor %}
 
       </div>
 
-    </section>
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#bookCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#bookCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+    </div>
 
   </div>
 
 </div>
+{% endif %}
 
 <hr>
 

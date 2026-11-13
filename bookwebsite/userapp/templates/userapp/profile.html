@@ -23,17 +23,9 @@
 
                     <!-- Profile Image -->
                     <div class="mb-3">
-                        {% if user.profile.image %}
-                            <img src="{{ user.profile.image.url }}"
-                                 class="rounded-circle shadow"
-                                 width="120" height="120"
-                                 alt="Profile Image">
-                        {% else %}
-                            <img src="{% static 'default-user.png' %}"
-                                 class="rounded-circle shadow"
-                                 width="120" height="120"
-                                 alt="Default Profile">
-                        {% endif %}
+                        <i class="fas fa-user-circle text-primary"
+                           style="font-size: 110px;"
+                           aria-hidden="true"></i>
                     </div>
 
                     <!-- Name -->

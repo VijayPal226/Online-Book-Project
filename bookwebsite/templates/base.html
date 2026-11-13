@@ -76,7 +76,7 @@
                 </a>
 
                 <!-- Login/User -->
-                {% if userid %}
+                {% if user.is_authenticated %}
 
                 <div class="dropdown">
 
@@ -85,7 +85,7 @@
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
 
-                        {{ userid|truncatechars:5|upper }}
+                        {{ user.username }}
 
                     </button>
 
@@ -93,7 +93,16 @@
 
                         <li>
                             <a class="dropdown-item"
-                                href="{% url 'userprofile' %}">
+                                href="{% url 'user_dashboard' %}">
+
+                                Dashboard
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                                href="{% url 'profile' %}">
 
                                 Profile
 
@@ -102,7 +111,7 @@
 
                         <li>
                             <a class="dropdown-item"
-                                href="{% url 'viewcart' %}">
+                                href="{% url 'cart' %}">
 
                                 Cart
 
@@ -111,7 +120,7 @@
 
                         <li>
                             <a class="dropdown-item"
-                                href="{% url 'userlogout' %}">
+                                href="{% url 'logout' %}">
 
                                 Logout
 
