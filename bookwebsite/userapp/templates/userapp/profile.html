@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h2 class="fw-bold">My Profile</h2>
+            <p class="text-muted">View and manage your account details</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-body p-4 text-center">
+
+                    <!-- Profile Image -->
+                    <div class="mb-3">
+                        {% if user.profile.image %}
+                            <img src="{{ user.profile.image.url }}"
+                                 class="rounded-circle shadow"
+                                 width="120" height="120"
+                                 alt="Profile Image">
+                        {% else %}
+                            <img src="{% static 'default-user.png' %}"
+                                 class="rounded-circle shadow"
+                                 width="120" height="120"
+                                 alt="Default Profile">
+                        {% endif %}
+                    </div>
+
+                    <!-- Name -->
+                    <h4 class="fw-bold">{{ user.username }}</h4>
+                    <p class="text-muted">{{ user.email }}</p>
+
+                    <hr>
+
+                    <!-- Details -->
+                    <div class="text-start">
+
+                        <p><strong>First Name:</strong> {{ user.first_name|default:"-" }}</p>
+                        <p><strong>Last Name:</strong> {{ user.last_name|default:"-" }}</p>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                        <p><strong>Joined:</strong> {{ user.date_joined|date:"d M Y" }}</p>
+                        <p><strong>Last Login:</strong> {{ user.last_login|date:"d M Y, H:i" }}</p>
+
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="d-grid gap-2 mt-3">
+
+                        <a href="{% url 'edit_profile' %}" class="btn btn-primary">
+                            Edit Profile
+                        </a>
+
+                        <a href="{% url 'change_password' %}" class="btn btn-warning">
+                            Change Password
+                        </a>
+
+                        <a href="{% url 'settings' %}" class="btn btn-outline-secondary">
+                            Settings
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

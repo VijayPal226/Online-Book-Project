@@ -1,0 +1,75 @@
+<!-- edit-book.html -->
+
+{% extends "adminapp/base.html" %}
+{% block admin %}
+
+<div class="container-fluid">
+
+    <div class="card border-0 shadow rounded-4">
+
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-4">
+                Edit Book
+            </h2>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label>Book Name</label>
+
+                    <input type="text"
+                        class="form-control"
+                        value="Python Book">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Author</label>
+
+                    <input type="text"
+                        class="form-control"
+                        value="Vijay">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Price</label>
+
+                    <input type="number"
+                        class="form-control"
+                        value="599">
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label>Description</label>
+
+                    <textarea class="form-control"
+                        rows="4">
+
+Best Programming Book
+
+                    </textarea>
+
+                </div>
+
+                <button class="btn btn-success">
+                    Update Book
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

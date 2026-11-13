@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-body p-4">
+
+                    <!-- Title -->
+                    <h3 class="text-center mb-4">Edit Profile</h3>
+
+                    <!-- Profile Image -->
+                    <div class="text-center mb-4">
+                        {% if user.profile.image %}
+                            <img src="{{ user.profile.image.url }}" 
+                                 class="rounded-circle shadow"
+                                 width="120" height="120"
+                                 alt="Profile Image">
+                        {% else %}
+                            <img src="{% static 'default-user.png' %}" 
+                                 class="rounded-circle shadow"
+                                 width="120" height="120"
+                                 alt="Default Profile">
+                        {% endif %}
+                    </div>
+
+                    <!-- Form -->
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control"
+                                   value="{{ user.username }}" required>
+                        </div>
+
+                        <!-- First Name -->
+                        <div class="mb-3">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control"
+                                   value="{{ user.first_name }}">
+                        </div>
+
+                        <!-- Last Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control"
+                                   value="{{ user.last_name }}">
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control"
+                                   value="{{ user.email }}" required>
+                        </div>
+
+                        <!-- Profile Image Upload -->
+                        <div class="mb-3">
+                            <label class="form-label">Change Profile Image</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+
+                        <!-- Messages -->
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-info py-2">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <!-- Submit -->
+                        <div class="d-grid mt-3">
+                            <button type="submit" class="btn btn-success">
+                                Update Profile
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

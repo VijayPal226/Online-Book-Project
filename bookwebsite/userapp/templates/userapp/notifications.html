@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">Notifications</h2>
+            <p class="text-muted">All your recent updates and alerts</p>
+        </div>
+    </div>
+
+    <!-- Notifications List -->
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-body p-0">
+
+                    {% if notifications %}
+
+                        <ul class="list-group list-group-flush">
+
+                            {% for notification in notifications %}
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+
+                                    <div class="ms-2 me-auto">
+
+                                        <!-- Title -->
+                                        <div class="fw-bold">
+                                            {{ notification.title }}
+                                        </div>
+
+                                        <!-- Message -->
+                                        <div class="text-muted small">
+                                            {{ notification.message }}
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Time -->
+                                    <div class="text-end">
+                                        <small class="text-muted">
+                                            {{ notification.created_at|date:"d M Y, H:i" }}
+                                        </small>
+
+                                        <!-- Status -->
+                                        {% if not notification.is_read %}
+                                            <span class="badge bg-primary mt-1">New</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary mt-1">Read</span>
+                                        {% endif %}
+                                    </div>
+
+                                </li>
+                            {% endfor %}
+
+                        </ul>
+
+                    {% else %}
+
+                        <!-- Empty State -->
+                        <div class="text-center py-5">
+                            <h5 class="text-muted">No notifications</h5>
+                            <p class="text-muted">You're all caught up 🎉</p>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

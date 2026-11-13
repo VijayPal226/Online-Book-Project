@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+
+<div class="container mt-4 mb-5">
+    <h1 class="text-center fw-bold">Contact Us</h1>
+    <hr>
+
+    <div class="row g-4">
+
+        <!-- Contact Form -->
+        <div class="col-lg-6">
+
+            {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="card shadow p-4 border-0 rounded-4">
+
+                <h2 class="text-center mb-4">Get In Touch</h2>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="exampleInputName" class="form-label fw-semibold">
+                            Name
+                        </label>
+                        <input type="text" name="name" class="form-control"
+                            id="exampleInputName" placeholder="Enter your name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label fw-semibold">
+                            Email
+                        </label>
+                        <input type="email" name="email" class="form-control"
+                            id="exampleInputEmail1"
+                            placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputNumber" class="form-label fw-semibold">
+                            Mobile Number
+                        </label>
+                        <input type="number" name="contactno" class="form-control"
+                            id="exampleInputNumber"
+                            placeholder="Enter mobile number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputMessage" class="form-label fw-semibold">
+                            Message
+                        </label>
+
+                        <textarea name="message" class="form-control"
+                            id="exampleInputMessage"
+                            rows="5"
+                            placeholder="Write your message here..."
+                            required></textarea>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input"
+                            id="exampleCheck1" required>
+
+                        <label class="form-check-label" for="exampleCheck1">
+                            I agree to contact policy
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Send Message
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-lg-6">
+
+            <div class="card shadow p-4 border-0 rounded-4 h-100">
+
+                <h2 class="mb-4 text-center">Contact Information</h2>
+
+                <div class="mb-4">
+                    <h5>
+                        <i class="fa-solid fa-location-dot text-danger"></i>
+                        Address
+                    </h5>
+
+                    <p class="text-muted">
+                        60 Feet Road,<br>
+                        Jankipuram Extension, Lucknow,<br>
+                        Uttar Pradesh, India
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h5>
+                        <i class="fa-solid fa-phone text-success"></i>
+                        Phone
+                    </h5>
+
+                    <p class="text-muted">
+                        +91 8853455765 <br>
+                        +91 9140026484
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h5>
+                        <i class="fa-solid fa-envelope text-primary"></i>
+                        Email
+                    </h5>
+
+                    <p class="text-muted">
+                        starterbob7318@gmail.com
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

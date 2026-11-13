@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">Downloads</h2>
+            <p class="text-muted">Access and download your available files</p>
+        </div>
+    </div>
+
+    <!-- Download List -->
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body p-4">
+
+                    {% if downloads %}
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>File Name</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for file in downloads %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td class="fw-semibold">{{ file.title }}</td>
+                                        <td class="text-muted">{{ file.description|default:"-" }}</td>
+                                        <td>{{ file.created_at|date:"d M Y" }}</td>
+                                        <td>
+                                            <a href="{{ file.file.url }}" class="btn btn-sm btn-primary" download>
+                                                Download
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    {% else %}
+
+                        <div class="text-center py-5">
+                            <h5 class="text-muted">No downloads available</h5>
+                            <p class="text-muted">Files will appear here when added.</p>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

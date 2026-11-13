@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">Payment History</h2>
+            <p class="text-muted">View all your past transactions</p>
+        </div>
+    </div>
+
+    <!-- Payment Table -->
+    <div class="row">
+
+        <div class="col-12">
+
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-body p-0">
+
+                    {% if payments %}
+
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Transaction ID</th>
+                                        <th>Amount</th>
+                                        <th>Method</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for payment in payments %}
+                                    <tr>
+
+                                        <td>{{ forloop.counter }}</td>
+
+                                        <td class="fw-semibold">
+                                            {{ payment.transaction_id }}
+                                        </td>
+
+                                        <td>
+                                            ₹{{ payment.amount }}
+                                        </td>
+
+                                        <td>
+                                            {{ payment.method }}
+                                        </td>
+
+                                        <!-- Status -->
+                                        <td>
+                                            {% if payment.status == "success" %}
+                                                <span class="badge bg-success">Success</span>
+                                            {% elif payment.status == "pending" %}
+                                                <span class="badge bg-warning text-dark">Pending</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">Failed</span>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            {{ payment.created_at|date:"d M Y, H:i" }}
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    {% else %}
+
+                        <!-- Empty State -->
+                        <div class="text-center py-5">
+                            <h5 class="text-muted">No payment history found</h5>
+                            <p class="text-muted">Your transactions will appear here</p>
+                            <a href="{% url 'payment_methods' %}" class="btn btn-primary mt-2">
+                                Make a Payment
+                            </a>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

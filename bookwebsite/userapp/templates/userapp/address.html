@@ -1,0 +1,214 @@
+<!-- address.html -->
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block main %}
+
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-10">
+
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+
+                    <div class="row g-0">
+
+                        <!-- Left Side -->
+
+                        <div class="col-lg-4 bg-dark text-white p-5">
+
+                            <h3 class="fw-bold mb-4">
+                                Saved Addresses
+                            </h3>
+
+                            <p class="text-light">
+                                Manage your delivery addresses for faster checkout and smooth shopping experience.
+                            </p>
+
+                            <div class="mt-5">
+
+                                <div class="border rounded-4 p-3 mb-3 bg-secondary">
+
+                                    <h6 class="fw-bold">
+                                        Home Address
+                                    </h6>
+
+                                    <p class="small mb-1">
+                                        Vijay Pal
+                                    </p>
+
+                                    <p class="small mb-1">
+                                        Gomti Nagar, Lucknow
+                                    </p>
+
+                                    <p class="small mb-0">
+                                        Uttar Pradesh, India
+                                    </p>
+
+                                </div>
+
+                                <div class="border rounded-4 p-3 bg-secondary">
+
+                                    <h6 class="fw-bold">
+                                        Office Address
+                                    </h6>
+
+                                    <p class="small mb-1">
+                                        Sector 15, Noida
+                                    </p>
+
+                                    <p class="small mb-0">
+                                        Uttar Pradesh, India
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Right Side -->
+
+                        <div class="col-lg-8 bg-white p-5">
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                                <div>
+
+                                    <h2 class="fw-bold">
+                                        Add New Address
+                                    </h2>
+
+                                    <p class="text-muted mb-0">
+                                        Fill your complete address details
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <form method="post">
+
+                                {% csrf_token %}
+
+                                <div class="row">
+
+                                    <div class="col-md-6 mb-4">
+
+                                        <label class="form-label fw-semibold">
+                                            Full Name
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control form-control-lg rounded-3"
+                                               placeholder="Enter full name">
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-4">
+
+                                        <label class="form-label fw-semibold">
+                                            Phone Number
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control form-control-lg rounded-3"
+                                               placeholder="Enter phone number">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-4">
+
+                                    <label class="form-label fw-semibold">
+                                        Street Address
+                                    </label>
+
+                                    <textarea class="form-control rounded-3"
+                                              rows="4"
+                                              placeholder="House no, street, area"></textarea>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-4 mb-4">
+
+                                        <label class="form-label fw-semibold">
+                                            City
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control form-control-lg rounded-3">
+
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+
+                                        <label class="form-label fw-semibold">
+                                            State
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control form-control-lg rounded-3">
+
+                                    </div>
+
+                                    <div class="col-md-4 mb-4">
+
+                                        <label class="form-label fw-semibold">
+                                            Pincode
+                                        </label>
+
+                                        <input type="text"
+                                               class="form-control form-control-lg rounded-3">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="mb-4">
+
+                                    <label class="form-label fw-semibold">
+                                        Country
+                                    </label>
+
+                                    <input type="text"
+                                           class="form-control form-control-lg rounded-3"
+                                           value="India">
+
+                                </div>
+
+                                <div class="d-flex gap-3">
+
+                                    <button class="btn btn-dark px-5 py-2 rounded-3">
+                                        Save Address
+                                    </button>
+
+                                    <button type="reset"
+                                            class="btn btn-outline-secondary px-5 py-2 rounded-3">
+                                        Reset
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

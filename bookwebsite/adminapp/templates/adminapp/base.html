@@ -1,0 +1,148 @@
+   <!-- adminapp/base.html -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet"
+        href="{% static 'mainapp/css/bootstrap.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        body{
+            background: #f4f6f9;
+        }
+
+        .sidebar{
+            height: 100vh;
+            background: #111827;
+            position: fixed;
+            width: 250px;
+            padding-top: 20px;
+        }
+
+        .sidebar a{
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 14px 20px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .sidebar a:hover{
+            background: #2563eb;
+            border-radius: 8px;
+            margin: 0 10px;
+        }
+
+        .content{
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .logo{
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            Admin Panel
+        </div>
+
+        <a href="{% url 'admin_dashboard' %}">
+            <i class="fa-solid fa-gauge"></i>
+            Dashboard
+        </a>
+
+        <a href="{% url 'addbook' %}">
+            <i class="fa-solid fa-book"></i>
+            Add Book
+        </a>
+
+        <a href="{% url 'managebooks' %}">
+            <i class="fa-solid fa-book-open"></i>
+            Manage Books
+        </a>
+
+        <a href="{% url 'categories' %}">
+            <i class="fa-solid fa-layer-group"></i>
+            Categories
+        </a>
+
+        <a href="{% url 'manageusers' %}">
+            <i class="fa-solid fa-users"></i>
+            Users
+        </a>
+
+        <a href="{% url 'orders' %}">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Orders
+        </a>
+
+        <a href="{% url 'payments' %}">
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+        </a>
+
+        <a href="{% url 'reviews' %}">
+            <i class="fa-solid fa-star"></i>
+            Reviews
+        </a>
+
+        <a href="{% url 'reports' %}">
+            <i class="fa-solid fa-chart-line"></i>
+            Reports
+        </a>
+
+        <a href="{% url 'settings' %}">
+            <i class="fa-solid fa-gear"></i>
+            Settings
+        </a>
+
+        <a href="{% url 'adminlogout' %}">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+        {% block admin %}
+
+        {% endblock %}
+
+    </div>
+
+    <script src="{% static 'mainapp/js/bootstrap.bundle.js' %}"></script>
+
+</body>
+</html>

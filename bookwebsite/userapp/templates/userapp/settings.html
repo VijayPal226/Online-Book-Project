@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">Account Settings</h2>
+            <p class="text-muted">Manage your account preferences and security</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Profile Settings -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">👤 Profile Settings</h5>
+
+                    <p class="text-muted small">
+                        Update your personal information like name, email, and profile picture.
+                    </p>
+
+                    <a href="{% url 'edit_profile' %}" class="btn btn-primary w-100">
+                        Edit Profile
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Security Settings -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">🔒 Security</h5>
+
+                    <p class="text-muted small">
+                        Change your password or manage account security options.
+                    </p>
+
+                    <a href="{% url 'change_password' %}" class="btn btn-warning w-100 mb-2">
+                        Change Password
+                    </a>
+
+                    <a href="{% url 'delete_account' %}" class="btn btn-danger w-100">
+                        Delete Account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">🔔 Notifications</h5>
+
+                    <p class="text-muted small">
+                        Control email, SMS, and system notifications.
+                    </p>
+
+                    <a href="{% url 'notifications' %}" class="btn btn-success w-100">
+                        Manage Notifications
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Payment Settings -->
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">💳 Payments</h5>
+
+                    <p class="text-muted small">
+                        View payment methods and transaction history.
+                    </p>
+
+                    <a href="{% url 'payment_methods' %}" class="btn btn-primary w-100 mb-2">
+                        Payment Methods
+                    </a>
+
+                    <a href="{% url 'payment_history' %}" class="btn btn-outline-primary w-100">
+                        Payment History
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

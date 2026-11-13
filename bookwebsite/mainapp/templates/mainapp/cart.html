@@ -1,0 +1,70 @@
+<!-- cart.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+
+<div class="container mt-5 mb-5">
+
+    <h1 class="text-center fw-bold mb-5">
+        Shopping Cart
+    </h1>
+
+    <div class="card shadow border-0 rounded-4 p-4">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-3">
+
+                <img src="{% static 'mainapp/img/book.jpg' %}"
+                    class="img-fluid rounded"
+                    alt="book">
+
+            </div>
+
+            <div class="col-md-5">
+
+                <h3>
+                    Python Programming
+                </h3>
+
+                <p class="text-muted">
+                    Best Coding Book
+                </p>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <h4>
+                    ₹499
+                </h4>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <button class="btn btn-danger">
+                    Remove
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-end mt-4">
+
+        <h3 class="fw-bold">
+            Total : ₹499
+        </h3>
+
+        <button class="btn btn-success btn-lg mt-2">
+            Checkout
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}

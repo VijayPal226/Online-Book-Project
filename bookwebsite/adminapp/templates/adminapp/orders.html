@@ -1,0 +1,66 @@
+<!-- orders.html -->
+
+{% extends "adminapp/base.html" %}
+{% block admin %}
+
+<div class="container-fluid">
+
+    <div class="card border-0 shadow rounded-4">
+
+        <div class="card-body">
+
+            <h2 class="fw-bold mb-4">
+                Orders
+            </h2>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Book</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>#1001</td>
+
+                            <td>Vijay</td>
+
+                            <td>Python Mastery</td>
+
+                            <td>₹599</td>
+
+                            <td>
+
+                                <span class="badge bg-success">
+                                    Delivered
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

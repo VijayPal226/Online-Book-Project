@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col text-center">
+            <h2 class="fw-bold">Support Center</h2>
+            <p class="text-muted">We’re here to help you. Submit your issue or question below.</p>
+        </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- Support Form -->
+        <div class="col-md-7">
+
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">Submit a Ticket</h5>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" name="name" class="form-control"
+                                   placeholder="Enter your name" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control"
+                                   placeholder="Enter your email" required>
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="mb-3">
+                            <label class="form-label">Subject</label>
+                            <input type="text" name="subject" class="form-control"
+                                   placeholder="Enter issue subject" required>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" rows="5" class="form-control"
+                                      placeholder="Describe your issue..." required></textarea>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Submit Ticket
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Info Section -->
+        <div class="col-md-5">
+
+            <div class="card shadow-sm border-0 rounded-3 h-100">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">📞 Contact Information</h5>
+
+                    <p class="text-muted small">
+                        If your issue is urgent, you can contact us directly.
+                    </p>
+
+                    <ul class="list-unstyled text-muted small">
+
+                        <li class="mb-2">
+                            📧 Email: support@example.com
+                        </li>
+
+                        <li class="mb-2">
+                            📞 Phone: +91 98765 43210
+                        </li>
+
+                        <li class="mb-2">
+                            ⏰ Support Hours: 9 AM - 6 PM
+                        </li>
+
+                        <li class="mb-2">
+                            📍 Location: India
+                        </li>
+
+                    </ul>
+
+                    <hr>
+
+                    <h6>Quick Help</h6>
+                    <p class="text-muted small">
+                        Check FAQs or visit help articles before submitting a ticket.
+                    </p>
+
+                    <a href="{% url 'faq' %}" class="btn btn-outline-primary w-100">
+                        View FAQs
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

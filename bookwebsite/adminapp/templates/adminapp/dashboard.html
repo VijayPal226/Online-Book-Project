@@ -1,0 +1,316 @@
+<!-- dashboard.html -->
+
+{% extends "adminapp/base.html" %}
+{% load static %}
+{% block admin %}
+
+<div class="container-fluid">
+
+    <!-- Top Heading -->
+    <div class="d-flex justify-content-between
+        align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">
+                Dashboard
+            </h2>
+
+            <p class="text-muted">
+                Welcome Back Admin
+            </p>
+
+        </div>
+
+        <div>
+
+            <button class="btn btn-dark">
+
+                <i class="fa-solid fa-download"></i>
+                Download Report
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4">
+
+        <!-- Total Books -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between
+                        align-items-center">
+
+                        <div>
+
+                            <h6 class="text-muted">
+                                Total Books
+                            </h6>
+
+                            <h2 class="fw-bold">
+                                120
+                            </h2>
+
+                        </div>
+
+                        <div class="bg-primary
+                            text-white p-3 rounded-circle">
+
+                            <i class="fa-solid fa-book fa-xl"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Users -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between
+                        align-items-center">
+
+                        <div>
+
+                            <h6 class="text-muted">
+                                Total Users
+                            </h6>
+
+                            <h2 class="fw-bold">
+                                {{ total_users }}
+                            </h2>
+
+                        </div>
+
+                        <div class="bg-success
+                            text-white p-3 rounded-circle">
+
+                            <i class="fa-solid fa-users fa-xl"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Orders -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between
+                        align-items-center">
+
+                        <div>
+
+                            <h6 class="text-muted">
+                                Orders
+                            </h6>
+
+                            <h2 class="fw-bold">
+                                45
+                            </h2>
+
+                        </div>
+
+                        <div class="bg-warning
+                            text-white p-3 rounded-circle">
+
+                            <i class="fa-solid
+                                fa-cart-shopping fa-xl"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Revenue -->
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card border-0 shadow rounded-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between
+                        align-items-center">
+
+                        <div>
+
+                            <h6 class="text-muted">
+                                Revenue
+                            </h6>
+
+                            <h2 class="fw-bold">
+                                ₹75,000
+                            </h2>
+
+                        </div>
+
+                        <div class="bg-danger
+                            text-white p-3 rounded-circle">
+
+                            <i class="fa-solid
+                                fa-indian-rupee-sign fa-xl"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Recent Orders Table -->
+    <div class="card border-0 shadow rounded-4 mt-5">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between
+                align-items-center mb-4">
+
+                <h4 class="fw-bold">
+                    Recent Orders
+                </h4>
+
+                <a href="#"
+                    class="btn btn-primary">
+
+                    View All
+
+                </a>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover
+                    align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Book</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>#1001</td>
+
+                            <td>Vijay</td>
+
+                            <td>Python Mastery</td>
+
+                            <td>₹599</td>
+
+                            <td>
+
+                                <span class="badge
+                                    bg-success">
+
+                                    Completed
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>#1002</td>
+
+                            <td>Rahul</td>
+
+                            <td>Django Guide</td>
+
+                            <td>₹799</td>
+
+                            <td>
+
+                                <span class="badge
+                                    bg-warning text-dark">
+
+                                    Pending
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>#1003</td>
+
+                            <td>Aman</td>
+
+                            <td>Java Basics</td>
+
+                            <td>₹499</td>
+
+                            <td>
+
+                                <span class="badge
+                                    bg-danger">
+
+                                    Cancelled
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

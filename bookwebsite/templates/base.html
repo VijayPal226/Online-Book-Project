@@ -1,0 +1,449 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'mainapp/css/bootstrap.css' %}">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER START -->
+    <header class="bg-white shadow-sm py-2">
+
+        <div class="container-fluid d-flex align-items-center justify-content-between px-2">
+
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'mainapp/img/vidya.webp' %}"
+                        alt="Logo"
+                        height="55">
+                </a>
+
+            </div>
+
+            <!-- Search Bar -->
+            <form class="d-flex flex-grow-1 mx-3"
+                role="search"
+                style="max-width:500px;">
+
+                <input class="form-control me-2"
+                    type="search"
+                    placeholder="Search for products..."
+                    aria-label="Search">
+
+                <button class="btn btn-success"
+                    type="submit">
+
+                    Search
+
+                </button>
+
+            </form>
+
+            <!-- Icons -->
+            <div class="d-flex align-items-center gap-3">
+
+                <!-- Wishlist -->
+                <a href="{% url 'wishlist' %}"
+                    class="btn"
+                    title="Wishlist">
+
+                    <i class="fa-solid fa-heart fa-lg text-dark"></i>
+
+                </a>
+
+                <!-- Cart -->
+                <a href="{% url 'cart' %}"
+                    class="btn"
+                    title="Cart">
+
+                    <i class="fa-solid fa-cart-shopping fa-lg text-dark"></i>
+
+                </a>
+
+                <!-- Login/User -->
+                {% if userid %}
+
+                <div class="dropdown">
+
+                    <button class="btn btn-outline-secondary dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+
+                        {{ userid|truncatechars:5|upper }}
+
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        <li>
+                            <a class="dropdown-item"
+                                href="{% url 'userprofile' %}">
+
+                                Profile
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                                href="{% url 'viewcart' %}">
+
+                                Cart
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                                href="{% url 'userlogout' %}">
+
+                                Logout
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                {% else %}
+
+                <a href="{% url 'login' %}"
+                    class="btn btn-outline-success">
+
+                    Login
+
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </header>
+    <!-- HEADER END -->
+
+
+    <!-- NAVBAR START -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+
+        <div class="container">
+
+            <!-- Mobile Button -->
+            <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse"
+                id="navbarNav">
+
+                <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item px-3">
+
+                        <a class="nav-link fs-5 fw-bold"
+                            href="{% url 'home' %}">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item px-3">
+
+                        <a class="nav-link fs-5 fw-bold"
+                            href="{% url 'about' %}">
+
+                            About
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item px-3">
+
+                        <a class="nav-link fs-5 fw-bold"
+                            href="{% url 'contact' %}">
+
+                            Contact
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item px-3">
+
+                        <a class="nav-link fs-5 fw-bold"
+                            href="{% url 'signup' %}">
+
+                            Register
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+    <!-- NAVBAR END -->
+
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid">
+
+        {% block main %}
+
+        {% endblock %}
+
+    </div>
+
+
+    <!-- FOOTER START -->
+    <footer class="text-center text-lg-start bg-light text-muted mt-5">
+
+        <!-- Social Media -->
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+
+            <div class="d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+            </div>
+
+            <div>
+
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+
+                <a href="" class="me-4 text-reset">
+                    <i class="fab fa-github"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer Links -->
+        <section>
+
+            <div class="container text-center text-md-start mt-5">
+
+                <div class="row mt-3">
+
+                    <!-- Company -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+
+                            <i class="fas fa-gem me-3"></i>
+
+                            Book Store
+
+                        </h6>
+
+                        <p>
+
+                            Buy books online with best prices and latest collections.
+
+                        </p>
+
+                    </div>
+
+                    <!-- Products -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+
+                        <p><a href="#" class="text-reset">Programming</a></p>
+
+                        <p><a href="#" class="text-reset">Novels</a></p>
+
+                        <p><a href="#" class="text-reset">Education</a></p>
+
+                        <p><a href="#" class="text-reset">Story Books</a></p>
+
+                    </div>
+
+                    <!-- Useful Links -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful Links
+                        </h6>
+
+                        <p><a href="#" class="text-reset">Pricing</a></p>
+
+                        <p><a href="#" class="text-reset">Orders</a></p>
+
+                        <p><a href="#" class="text-reset">Help</a></p>
+
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Contact
+                        </h6>
+
+                        <p>
+                            <i class="fas fa-home me-3"></i>
+                            Lucknow, India
+                        </p>
+
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            info@example.com
+                        </p>
+
+                        <p>
+                            <i class="fas fa-phone me-3"></i>
+                            +91 9876543210
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Copyright -->
+        <div class="text-center p-4"
+            style="background-color: rgba(0, 0, 0, 0.05);">
+
+            © 2026 Copyright :
+            <span class="fw-bold">AKASH SHARMA</span>
+
+        </div>
+
+    </footer>
+    <!-- FOOTER END -->
+
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'mainapp/js/bootstrap.bundle.js' %}"></script>
+
+
+    <!-- Splide Slider -->
+    <script>
+
+        if (document.querySelector('.splide')) {
+
+            var splide = new Splide('.splide', {
+
+                type: 'loop',
+                perPage: 4,
+                perMove: 1,
+
+                breakpoints: {
+
+                    1000: {
+                        perPage: 3
+                    },
+
+                    640: {
+                        perPage: 2
+                    },
+
+                    400: {
+                        perPage: 1
+                    }
+
+                }
+
+            });
+
+            splide.mount();
+
+        }
+
+    </script>
+
+    <!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- Django Messages -->
+    {% if messages %}
+
+    {% for message in messages %}
+
+    <script>
+
+        const Toast = Swal.mixin({
+
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+
+            didOpen: (toast) => {
+
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+
+            }
+
+        });
+
+        Toast.fire({
+
+            icon: '{{message.tags}}',
+            title: '{{message}}'
+
+        });
+
+    </script>
+
+    {% endfor %}
+
+    {% endif %}
+
+</body>
+
+</html>

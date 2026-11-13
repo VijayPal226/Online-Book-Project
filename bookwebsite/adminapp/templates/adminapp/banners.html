@@ -1,0 +1,53 @@
+<!-- banners.html -->
+
+{% extends "adminapp/base.html" %}
+{% block admin %}
+
+<div class="container-fluid">
+
+    <div class="card border-0 shadow rounded-4">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between mb-4">
+
+                <h2 class="fw-bold">
+                    Banners
+                </h2>
+
+                <button class="btn btn-primary">
+                    Add Banner
+                </button>
+
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+
+                    <div class="card shadow border-0">
+
+                        <img src="https://via.placeholder.com/400x200"
+                            class="card-img-top">
+
+                        <div class="card-body text-center">
+
+                            <button class="btn btn-danger">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

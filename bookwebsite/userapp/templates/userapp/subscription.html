@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="row mb-4 text-center">
+        <div class="col">
+            <h2 class="fw-bold">Subscription Plans</h2>
+            <p class="text-muted">Choose a plan that fits your needs</p>
+        </div>
+    </div>
+
+    <!-- Plans -->
+    <div class="row g-4 justify-content-center">
+
+        <!-- Free Plan -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 rounded-3 h-100 text-center">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-2">Free Plan</h5>
+                    <h2 class="fw-bold">₹0</h2>
+                    <p class="text-muted small">Basic access for users</p>
+
+                    <ul class="list-unstyled text-muted small mt-3">
+                        <li>✔ Limited access</li>
+                        <li>✔ Basic features</li>
+                        <li>✔ Standard support</li>
+                    </ul>
+
+                    <form method="POST" action="{% url 'subscribe_free' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-primary w-100 mt-3">
+                            Start Free
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Basic Plan -->
+        <div class="col-md-4">
+
+            <div class="card shadow border-primary border-2 rounded-3 h-100 text-center">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-2">Basic Plan</h5>
+                    <h2 class="fw-bold">₹199</h2>
+                    <p class="text-muted small">For regular users</p>
+
+                    <ul class="list-unstyled text-muted small mt-3">
+                        <li>✔ Full book access</li>
+                        <li>✔ Downloads allowed</li>
+                        <li>✔ Priority support</li>
+                    </ul>
+
+                    <form method="POST" action="{% url 'subscribe_basic' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-primary w-100 mt-3">
+                            Choose Basic
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="col-md-4">
+
+            <div class="card shadow-sm border-0 rounded-3 h-100 text-center bg-light">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-2">Premium Plan</h5>
+                    <h2 class="fw-bold">₹499</h2>
+                    <p class="text-muted small">Best for professionals</p>
+
+                    <ul class="list-unstyled text-muted small mt-3">
+                        <li>✔ Unlimited access</li>
+                        <li>✔ Offline downloads</li>
+                        <li>✔ 24/7 support</li>
+                        <li>✔ Exclusive content</li>
+                    </ul>
+
+                    <form method="POST" action="{% url 'subscribe_premium' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-dark w-100 mt-3">
+                            Go Premium
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

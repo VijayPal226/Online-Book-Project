@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container py-5">
+
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">Reviews</h2>
+            <p class="text-muted">See what users are saying and share your feedback</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Review Form -->
+        <div class="col-md-5">
+
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-body p-4">
+
+                    <h5 class="mb-3">Write a Review</h5>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <!-- Rating -->
+                        <div class="mb-3">
+                            <label class="form-label">Rating</label>
+                            <select name="rating" class="form-select" required>
+                                <option value="">Select rating</option>
+                                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                                <option value="4">⭐⭐⭐⭐ - Good</option>
+                                <option value="3">⭐⭐⭐ - Average</option>
+                                <option value="2">⭐⭐ - Poor</option>
+                                <option value="1">⭐ - Bad</option>
+                            </select>
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="mb-3">
+                            <label class="form-label">Comment</label>
+                            <textarea name="comment" rows="4" class="form-control"
+                                      placeholder="Write your review..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Submit Review
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Reviews List -->
+        <div class="col-md-7">
+
+            <div class="card shadow-sm border-0 rounded-3">
+
+                <div class="card-body">
+
+                    <h5 class="mb-3">All Reviews</h5>
+
+                    {% if reviews %}
+
+                        {% for review in reviews %}
+                            <div class="border-bottom pb-3 mb-3">
+
+                                <!-- User & Rating -->
+                                <div class="d-flex justify-content-between">
+
+                                    <strong>{{ review.user.username }}</strong>
+
+                                    <span>
+                                        {% if review.rating == 5 %}⭐⭐⭐⭐⭐
+                                        {% elif review.rating == 4 %}⭐⭐⭐⭐
+                                        {% elif review.rating == 3 %}⭐⭐⭐
+                                        {% elif review.rating == 2 %}⭐⭐
+                                        {% else %}⭐
+                                        {% endif %}
+                                    </span>
+
+                                </div>
+
+                                <!-- Comment -->
+                                <p class="text-muted mb-1">
+                                    {{ review.comment }}
+                                </p>
+
+                                <!-- Date -->
+                                <small class="text-muted">
+                                    {{ review.created_at|date:"d M Y, H:i" }}
+                                </small>
+
+                            </div>
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p class="text-muted text-center py-4">
+                            No reviews yet. Be the first to review!
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Title -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold">User_Dashboard</h2>
+            <p class="text-muted">Welcome back! Here is your overview.</p>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-4">
+
+        <!-- Users -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 rounded-3 text-center p-3">
+                <h5>Total Users</h5>
+                <h2 class="text-primary">{{ total_users|default:0 }}</h2>
+            </div>
+        </div>
+
+        <!-- Orders -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 rounded-3 text-center p-3">
+                <h5>Total Orders</h5>
+                <h2 class="text-success">{{ total_orders|default:0 }}</h2>
+            </div>
+        </div>
+
+        <!-- Products -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 rounded-3 text-center p-3">
+                <h5>Total Products</h5>
+                <h2 class="text-warning">{{ total_products|default:0 }}</h2>
+            </div>
+        </div>
+
+        <!-- Revenue -->
+        <div class="col-md-3 col-sm-6">
+            <div class="card shadow-sm border-0 rounded-3 text-center p-3">
+                <h5>Revenue</h5>
+                <h2 class="text-danger">₹{{ total_revenue|default:0 }}</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="row mt-5">
+
+        <!-- Recent Users -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Recent Users</h5>
+                </div>
+                <div class="card-body">
+
+                    {% if recent_users %}
+                        <ul class="list-group list-group-flush">
+                            {% for user in recent_users %}
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>{{ user.username }}</span>
+                                    <small class="text-muted">{{ user.date_joined }}</small>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No recent users found.</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">Recent Orders</h5>
+                </div>
+                <div class="card-body">
+
+                    {% if recent_orders %}
+                        <ul class="list-group list-group-flush">
+                            {% for order in recent_orders %}
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Order #{{ order.id }}</span>
+                                    <small class="text-muted">{{ order.created_at }}</small>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No recent orders found.</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
